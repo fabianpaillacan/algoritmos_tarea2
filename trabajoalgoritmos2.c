@@ -178,8 +178,7 @@ int buscarRut(catastro u, cadena rut){
       enlace ptr=u[i];
       while(ptr!=NULL){
       if(strcmp(ptr->rut, rut)==0){
-      
-      return 1;
+        return 1;
       }
       else {
         ptr=ptr->link;
@@ -187,7 +186,7 @@ int buscarRut(catastro u, cadena rut){
       }
       }
     }
-    return 0;
+  return 0;
 }
 
 void desplegar(){
