@@ -88,71 +88,71 @@ void stringRegion(int region, cadena respuesta)
     if (region == 1) {
         strcpy(respuesta, "Tarapaca");
 
-        //return respuesta;
+      
     }
     else if (region == 2) {
         strcpy(respuesta, "Antofagasta");
-        //return respuesta;
+      
     }
     else if (region == 3) {
         strcpy(respuesta, "Atacama");
-        //return respuesta;
+      
     }
     else if (region == 4) {
         strcpy(respuesta, "Coquimbo");
-        //return respuesta;
+      
     }
     else if (region == 5) {
         strcpy(respuesta, "Valparaiso");
-        //return respuesta;
+      
     }
     else if (region == 6) {
         strcpy(respuesta, "Ohiggins");
-        //return respuesta;
+      
     }
     else if (region == 7) {
         strcpy(respuesta, "Maule");
-        //return respuesta;
+      
     }
     else if (region == 8) {
         strcpy(respuesta, "Bio Bio");
-        //return respuesta;
+      
     }
     else if (region == 9) {
         strcpy(respuesta, "Araucania");
-        //return respuesta;
+      
     }
     else if (region == 10) {
         strcpy(respuesta, "Los lagos");
-        //return respuesta;
+      
     }
     else if (region == 11) {
         strcpy(respuesta, "Aysen");
-        //return respuesta;
+      
     }
     else if (region == 12) {
         strcpy(respuesta, "Magallenes");
-        //return respuesta;
+      
     }
     else if (region == 13) {
         strcpy(respuesta, "Metropolitana");
-        //return respuesta;
+      
     }
     else if (region == 14) {
         strcpy(respuesta, "Los rios");
-        //return respuesta;
+      
     }
     else if (region == 15) {
         strcpy(respuesta, "Arica");
-        //return respuesta;
+      
     }
     else if (region == 16) {
         strcpy(respuesta, "Nuble");
-        //return respuesta;
+      
     }
     else {
         strcpy(respuesta, "region no valida.");
-        //return respuesta;
+      
     }
 }
 void interaccionAgregar(catastro u)
@@ -509,5 +509,3 @@ int main(void)
     return 0;
 }
 
-
- 
