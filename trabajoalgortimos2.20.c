@@ -47,7 +47,7 @@ void agregar(catastro u) // funcion encargada de agregar un nodo
     cadena nombreRegion;
     printf("Ingrese la region a la que pertenece: \n");
     printf("1.-Tarapaca.\n2.-Antofagasta.\n3.-Atacama.\n4.-Coquimbo.\n5.-Valparaiso.\n6.-O'higgins.\n7.-El Maule.\n8.-El Bio-Bio.\n");
-    printf("9.-Araucania\n10.-Los Lagos.\n11.-Aysen.\n12.-Magallanes y Antartida chilena.\n13.-Region Metropolitana de Santiago.\n14.-Los Rios.\n15.-Arica y Parinacota\n16.-ñuble\n\n\n");
+    printf("9.-Araucania\n10.-Los Lagos.\n11.-Aysen.\n12.-Magallanes y Antartida chilena.\n13.-Region Metropolitana de Santiago.\n14.-Los Rios.\n15.-Arica y Parinacota\n16.-Nuble\n\n\n");
     printf("Region: ");
     scanf("%d", &region);
 
@@ -75,9 +75,10 @@ void agregar(catastro u) // funcion encargada de agregar un nodo
     strcpy(p->region, nombreRegion);
 
     //No es necesario fijarse si el primero es NULL porque se esta agregando al principio.
-    enlace* L = &u[region];
-    p->link = *L;
-    *L = p;
+    //enlace* cabeza= &u[region]; //es un puntero a una variable de tipo enlace, u[region] es de tipo enlace. y & retorna la direccion de memoria de u[region]
+    p->link = u[region]; // p->link apunta a la lista antigua. esto hace una dereferenciacion. 
+    //*cabeza = p;//la direccion memoria sea igual al nuevo nodo.
+    u[region]=p;
 }
 void stringRegion(int region, cadena respuesta)
 {
@@ -278,11 +279,12 @@ int seleccionarRegion()
 
     printf("Opciones disponibles:  \n");
     printf("----------------------------------------\n");
-    printf("tarapaca, antofagasta, atacama, coquimbo, valparaiso, ohiggins, maule,\nbiobio, araucania, Los lagos, aysen, magallanes, metropolitana, los rios, arica, nuble\n");
+    printf("tarapaca, antofagasta, atacama, coquimbo, valparaiso, ohiggins, maule,\nbiobio, araucania, Los lagos, aysen, magallanes, metropolitana, los rios, arica, nuble");
     printf("\n----------------------------------------\n");
-    printf("Ingrese el nombre de la region: ");
 
-    fflush(stdin);
+    printf("Ingrese el nombre de la region: ");
+    printf("\n");
+    setbuf(stdin,NULL); //lo setea a nulo.
     fgets(REGION,24,stdin);
     printf("\nregion vale: %s\n", REGION);
     if (strcmp(REGION, Tarapaca) == 0) {
@@ -349,13 +351,15 @@ void obtener(catastro u)
         enlace ptr = u[i];
 
         while (ptr != NULL) {
-
+            total++;
             if (ptr->edad > 70) {
                 mayores++;
+                ptr=ptr->link;
+              
             }
             else {
                 ptr = ptr->link;
-                total++;
+                
             }
         }
     }
@@ -411,10 +415,11 @@ void desplegar(catastro u, cadena region)
         printf("Fecha de diagnostico: %d\n", ptr->fechaDiagnostico);
         printf("Region: %s\n", ptr->region);
         calcularDias(fecha, ptr->fechaDiagnostico);
-        printf("************************\n");
+        
         ptr=ptr->link;
         
     }
+printf("************************\n");
 }
 void calcularDias(int fecha1, int fecha2)
 {
@@ -504,3 +509,5 @@ int main(void)
     return 0;
 }
 
+
+ 
