@@ -20,12 +20,14 @@ int buscarRut(catastro u, cadena rut);
 
 
 void inicializar (catastro u){
-  for (int i=0; i<16; i++){
+  
+  for (int i=0; i<16; i++) {
        u[i]=NULL;
-   }
+  }
 }
 
 void agregar (catastro u){
+  
   int volver, region;
   cadena rut,nombre;
   enlace p,q;
@@ -42,10 +44,12 @@ void agregar (catastro u){
     printf ("ingrese su rut: ");
     scanf("%s",rut);
     int encontrado=buscarRut(u,rut);//llama a la funcion.
+      
       if (encontrado){
         printf("Rut ya registrado, intente nuevamente.\n");
         return;
-      }
+        }
+   
     strcpy(p->rut,rut); 
     printf ("ingrese su nombre: ");
     scanf("%s",nombre);
@@ -58,36 +62,38 @@ void agregar (catastro u){
       enlace *L=&u[region];
        p->link=*L;
       *L=p;
-  }
-   void preguntar(catastro u){
-     int volver;
-      do{
-        agregar(u); // se va a la funcion agregar, se completa y pregunta. 
-        printf ("desea agregar otro contagiado: \n");
-        printf("1.-Si.\n2.-No.\n");
-        scanf("%d",&volver);
-        system("clear"); // borra la pantalla
-      }while(1==volver);
+}
+void preguntar(catastro u){
+     
+  int volver;
+    do{
+      agregar(u); // se va a la funcion agregar, se completa y pregunta. 
+      printf ("desea agregar otro contagiado: \n");
+      printf("1.-Si.\n2.-No.\n");
+      scanf("%d",&volver);
+      system("clear"); // borra la pantalla
+    }while(1==volver);
    
-   }   
-    void print (catastro u){
+}   
+void print (catastro u){
     
-    for (int i=0; i<16; i++){
-      enlace ptr=u[i]; // ptr toma el de los indices ¿?
-      printf("region:  %i\n", i+1); 
+  for (int i=0; i<16; i++){
+    enlace ptr=u[i]; // ptr toma el de los indices ¿?
+    printf("region:  %i\n", i+1); 
       
-      while (ptr!=NULL){
-        printf("*****************************");
-        printf ("Edad: %d\n", ptr->edad);
-        printf ("Fecha de diagnostico: %d\n", ptr->fechaDiagnostico);
-        printf("Nombre: %s\n",ptr->nombre);
-        printf("rut: %s\n",ptr->rut);
-        
-        ptr=ptr->link;//pasa al siguiente nodo
-   }
+    while (ptr!=NULL){
+      printf("*****************************");
+      printf ("Edad: %d\n", ptr->edad);
+      printf ("Fecha de diagnostico: %d\n", ptr->fechaDiagnostico);
+      printf("Nombre: %s\n",ptr->nombre);
+      printf("rut: %s\n",ptr->rut);
+      
+      ptr=ptr->link;//pasa al siguiente nodo
+    }
   }
 }
 void eliminar(catastro u ){
+  
   cadena rutEliminado;
   cadena rut;
 
@@ -100,10 +106,11 @@ void eliminar(catastro u ){
       eliminarNodo(&u[regionEliminada-1], rutEliminado); // se va a la funcion eliminarNodo.           
 } 
 void eliminarNodo (enlace *L, cadena rut){
+  
   enlace p,q;
    p=*L;
    q=*L;
-     printf("\n%s\n",q->rut);
+    printf("\n%s\n",q->rut);
       
   if(strcmp(q->rut, rut)==0){
     printf("\nentre a la condicion\n");
@@ -112,10 +119,9 @@ void eliminarNodo (enlace *L, cadena rut){
     free(q);
     q = NULL;
       
-      return;
+    return;
   }
   while(q != NULL){
-
     if(strcmp(q->rut, rut)!=0){
       
       p = q;
@@ -146,7 +152,6 @@ void buscar(cadena rut, catastro u, int region){
       return;
     }
     else{
-
       q=q->link;
     }
   }
@@ -159,14 +164,14 @@ void obtener(catastro u){
   for (int i=0; i<16; i++){
     enlace ptr=u[i];      
       
-      while(ptr!=NULL){
-        if(ptr->edad>70){
+    while(ptr!=NULL){
+      if(ptr->edad>70){
           mayores++;
-        }
-        else {
+      }
+      else {
         ptr=ptr->link;
         total++;
-        }  
+      }    
     }
   }
     porcentaje=mayores*100/total;
@@ -174,21 +179,20 @@ void obtener(catastro u){
 }
 int buscarRut(catastro u, cadena rut){
  
-    for (int i=0; i<16; i++){
-      enlace ptr=u[i];
-      while(ptr!=NULL){
+  for (int i=0; i<16; i++){
+    enlace ptr=u[i];
+      
+    while(ptr!=NULL){
       if(strcmp(ptr->rut, rut)==0){
         return 1;
       }
       else {
         ptr=ptr->link;
-        
-      }
       }
     }
+  }
   return 0;
 }
-
 void desplegar(){
 
 }
