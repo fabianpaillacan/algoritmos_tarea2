@@ -282,7 +282,7 @@ int seleccionarRegion()
     printf("Ingrese el nombre de la region: ");
 
     fflush(stdin);
-    fgets(REGION,24,stdin);
+    gets(REGION);
 
     if (strcmp(REGION, Tarapaca) == 0) {
 
