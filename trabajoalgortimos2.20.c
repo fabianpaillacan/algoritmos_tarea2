@@ -470,7 +470,6 @@ int main(void)
 
     catastro u;
     cadena region;
-    
     inicializar(u);
         while (1) {
 
