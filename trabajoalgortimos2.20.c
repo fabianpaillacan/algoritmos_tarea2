@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,7 +15,7 @@ typedef struct contagiado {
 typedef nodo* enlace;
 typedef enlace catastro[16];
 int printMenu();
-void eliminarNodo(enlace* head, cadena rut);
+void eliminar(enlace* L, cadena rut);
 int buscarRut(catastro u, cadena rut);
 int seleccionarRegion();
 void calcularDias(int fecha1, int fecha2);
@@ -26,9 +25,9 @@ int printMenu()
     int opcion;
     printf("\nPresione su opcion: \n");
     printf("0.-Imprimir lista de pacientes\n");
-    printf("1.-Agregar un paciente.\n2.-Eliminar paciente.\n");
-    printf("3.-Buscar paciente.\n4.-Obtener porcentaje mayores de 70\n5.-Desplegar todos los pacientes de una region.\n");
-    printf("\nOpcion: ");
+    printf("1.-Agregar un paciente.\n2.-Eliminar paciente.\n3.-Buscar paciente.\n4.-Obtener porcentaje mayores de 70\n5.-Desplegar todos los pacientes de una region.\n6.-Salir.");
+    printf("\n\n");
+    printf("Opcion: ");
     scanf("%d", &opcion);
     return opcion;
 }
@@ -48,7 +47,7 @@ void agregar(catastro u) // funcion encargada de agregar un nodo
     cadena nombreRegion;
     printf("Ingrese la region a la que pertenece: \n");
     printf("1.-Tarapaca.\n2.-Antofagasta.\n3.-Atacama.\n4.-Coquimbo.\n5.-Valparaiso.\n6.-O'higgins.\n7.-El Maule.\n8.-El Bio-Bio.\n");
-    printf("9.-Araucania\n10.-Los Lagos.\n11.-Aysen.\n12.-Magallanes y Antartida chilena.\n13.-Region Metropolitana de Santiago.\n14.-Los Rios.\n15.-Arica y Parinacota\n16.-Ñuble\n\n\n");
+    printf("9.-Araucania\n10.-Los Lagos.\n11.-Aysen.\n12.-Magallanes y Antartida chilena.\n13.-Region Metropolitana de Santiago.\n14.-Los Rios.\n15.-Arica y Parinacota\n16.-ñuble\n\n\n");
     printf("Region: ");
     scanf("%d", &region);
 
@@ -63,8 +62,10 @@ void agregar(catastro u) // funcion encargada de agregar un nodo
         return;
     }
     strcpy(p->rut, rut);
+    
     printf("Ingrese su nombre: ");
-    fflush(stdin);
+    //fflush(stdin);
+    setbuf(stdin,NULL);
     fgets(nombre, 24, stdin);
     strcpy(p->nombre, nombre);
     printf("Ingrese su edad: ");
@@ -174,7 +175,7 @@ void print(catastro u)
         while (ptr != NULL) {
             printf("*****************************\n");
             printf("Edad: %d\n", ptr->edad);
-            printf("Fecha de diagnostico: [AAAAMMDD]%d\n", ptr->fechaDiagnostico);
+            printf("Fecha de diagnostico:%d\n", ptr->fechaDiagnostico);
             printf("Nombre: %s", ptr->nombre);
             printf("rut: %s\n", ptr->rut);
             printf("region: %s\n", ptr->region); //imprimir la string de region.
@@ -281,7 +282,7 @@ int seleccionarRegion()
     printf("Ingrese el nombre de la region: ");
 
     fflush(stdin);
-    gets(REGION);
+    fgets(REGION,24,stdin);
 
     if (strcmp(REGION, Tarapaca) == 0) {
 
@@ -379,11 +380,11 @@ int buscarRut(catastro u, cadena rut)
     return 0;
 }
 
-void desplegar(catastro u, cadena nombre, cadena region)
+void desplegar(catastro u, cadena region)
 {
     //printf("La funcion aun no esta implemtanda\n");
     //return;
-    printf("\nFuncion desplegar: \n");
+    printf("\nFuncion desplegar \n");
 
     int regionSeleccionada = seleccionarRegion();
     if (regionSeleccionada == -1) {
@@ -393,7 +394,7 @@ void desplegar(catastro u, cadena nombre, cadena region)
     enlace ptr = u[regionSeleccionada];
     int fecha, diasContagio;
 
-    printf("Ingrese la fecha del dia de hoy: ");
+    printf("Ingrese la fecha del dia de hoy[AAAAMMDD]: ");
     scanf("%d", &fecha);
     printf("\n\n");
 
@@ -403,15 +404,11 @@ void desplegar(catastro u, cadena nombre, cadena region)
         printf("Rut: %s\n", ptr->rut);
         printf("Edad: %d\n", ptr->edad);
         printf("Fecha de diagnostico: %d\n", ptr->fechaDiagnostico);
+        printf("Region: %s\n", ptr->region);
         calcularDias(fecha, ptr->fechaDiagnostico);
         printf("************************\n");
-
-        if (ptr->link == NULL) {
-            return;
-        }
-        else {
-            ptr = ptr->link;
-        }
+        ptr=ptr->link;
+        
     }
 }
 void calcularDias(int fecha1, int fecha2)
@@ -428,15 +425,15 @@ void calcularDias(int fecha1, int fecha2)
 
     if (anoCon > ano) {
         printf("año no valido.\n");
-        return 0;
+        return ;
     }
     else if (anoCon == ano && mesCon > mes) {
         printf("mes no valido.\n");
-        return 0;
+        return ;
     }
     else if (anoCon == ano && mesCon > mes && diaCon > dia) {
         printf("dia no valido\n");
-        return 0;
+        return ;
     }
 
     /*printf("dia%d\n",dia);
@@ -473,11 +470,9 @@ int main(void)
 
     catastro u;
     cadena region;
-    cadena rut, nombre;
-    int menu = 1;
+    
     inicializar(u);
-    //int opcion=printMenu();
-    while (1) {
+        while (1) {
 
         switch (printMenu()) {
         case 0:
@@ -496,8 +491,10 @@ int main(void)
             obtener(u);
             break;
         case 5:
-            desplegar(u, nombre, region);
+            desplegar(u, region);
             break;
+        case 6: 
+            return 0;        
         }
     }
     return 0;
