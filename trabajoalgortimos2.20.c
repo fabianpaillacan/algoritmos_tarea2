@@ -47,7 +47,7 @@ void agregar(catastro u) // funcion encargada de agregar un nodo
     cadena nombreRegion;
     printf("Ingrese la region a la que pertenece: \n");
     printf("1.-Tarapaca.\n2.-Antofagasta.\n3.-Atacama.\n4.-Coquimbo.\n5.-Valparaiso.\n6.-O'higgins.\n7.-El Maule.\n8.-El Bio-Bio.\n");
-    printf("9.-Araucania\n10.-Los Lagos.\n11.-Aysen.\n12.-Magallanes y Antartida chilena.\n13.-Region Metropolitana de Santiago.\n14.-Los Rios.\n15.-Arica y Parinacota\n16.-ñuble\n\n\n");
+    printf("9.-Araucania\n10.-Los Lagos.\n11.-Aysen.\n12.-Magallanes y Antartida chilena.\n13.-Region Metropolitana de Santiago.\n14.-Los Rios.\n15.-Arica y Parinacota\n16.-Nuble\n\n\n");
     printf("Region: ");
     scanf("%d", &region);
 
