@@ -258,6 +258,7 @@ int seleccionarRegion()
 
     cadena REGION, Tarapaca, Antofagasta, Atacama, Coquimbo, Valparaiso, Ohiggins, Maule, Biobio;
     cadena Araucania, LosLagos, Aysen, Magallanes, Metropolitana, Losrios, Arica, nuble;
+    
     strcpy(Tarapaca, "tarapaca");
     strcpy(Antofagasta, "antofagasta");
     strcpy(Atacama, "atacama");
@@ -283,7 +284,7 @@ int seleccionarRegion()
 
     fflush(stdin);
     fgets(REGION,24,stdin);
-
+    printf("\nregion vale: %s\n", REGION);
     if (strcmp(REGION, Tarapaca) == 0) {
 
         return 0;
@@ -387,9 +388,13 @@ void desplegar(catastro u, cadena region)
     printf("\nFuncion desplegar \n");
 
     int regionSeleccionada = seleccionarRegion();
+   
     if (regionSeleccionada == -1) {
-        printf("\nEsta region no existe.");
+        printf("\nEsta region no existe o fue mal escrita.");
         return;
+    }
+    else if (u==NULL){
+        
     }
     enlace ptr = u[regionSeleccionada];
     int fecha, diasContagio;
