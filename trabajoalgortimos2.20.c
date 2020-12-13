@@ -45,7 +45,7 @@ void agregar(catastro u) // funcion encargada de agregar un nodo
     p = (enlace)malloc(sizeof(nodo));
     int region;
     cadena nombreRegion;
-    printf("Ingrese la region a la que pertenece: \n");
+    printf("\nIngrese la region a la que pertenece: \n");
     printf("1.-Tarapaca.\n2.-Antofagasta.\n3.-Atacama.\n4.-Coquimbo.\n5.-Valparaiso.\n6.-O'higgins.\n7.-El Maule.\n8.-El Bio-Bio.\n");
     printf("9.-Araucania\n10.-Los Lagos.\n11.-Aysen.\n12.-Magallanes y Antartida chilena.\n13.-Region Metropolitana de Santiago.\n14.-Los Rios.\n15.-Arica y Parinacota\n16.-Nuble\n\n\n");
     printf("Region: ");
@@ -64,7 +64,6 @@ void agregar(catastro u) // funcion encargada de agregar un nodo
     strcpy(p->rut, rut);
     
     printf("Ingrese su nombre: ");
-    //fflush(stdin);
     setbuf(stdin,NULL);
     fgets(nombre, 24, stdin);
     strcpy(p->nombre, nombre);
@@ -74,15 +73,11 @@ void agregar(catastro u) // funcion encargada de agregar un nodo
     scanf("%d", &p->fechaDiagnostico);
     strcpy(p->region, nombreRegion);
 
-    //No es necesario fijarse si el primero es NULL porque se esta agregando al principio.
-    //enlace* cabeza= &u[region]; //es un puntero a una variable de tipo enlace, u[region] es de tipo enlace. y & retorna la direccion de memoria de u[region]
-    p->link = u[region]; // p->link apunta a la lista antigua. esto hace una dereferenciacion. 
-    //*cabeza = p;//la direccion memoria sea igual al nuevo nodo.
+    p->link = u[region]; 
     u[region]=p;
 }
 void stringRegion(int region, cadena respuesta)
 {
-
     region++;
 
     if (region == 1) {
@@ -285,7 +280,7 @@ int seleccionarRegion()
     printf("Ingrese el nombre de la region: ");
     printf("\n");
     setbuf(stdin,NULL); //lo setea a nulo.
-    fgets(REGION,24,stdin);
+    gets(REGION);
     printf("\nregion vale: %s\n", REGION);
     if (strcmp(REGION, Tarapaca) == 0) {
 
@@ -445,12 +440,6 @@ void calcularDias(int fecha1, int fecha2)
         printf("dia no valido\n");
         return ;
     }
-
-    /*printf("dia%d\n",dia);
-printf("%d\n",mes);
-printf("%d\n",ano);*/
-    // fecha 2 es actual.
-
     int diffano, diffdia, diffmes;
 
     if (dia >= diaCon)
